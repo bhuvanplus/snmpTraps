@@ -1,0 +1,104 @@
+Erlang/OTP 27 [DEVELOPMENT] [erts-14.1.1] [source] [64-bit] [smp:6:6] [ds:6:6:10] [async-threads:1]
+
+Eshell V14.1.1 (press Ctrl+G to abort, type help(). for help)
+(node1@vm-alarm)3> snmp_manager:start().
+ok
+(node1@vm-alarm)4> snmpm:verbosity(all, trace).
+*** [2024-11-28 21:23:06.153] SNMP M-SERVER LOG *** 
+   received net_if verbosity request
+*** [2024-11-28 21:23:06.155] SNMP M-SERVER LOG *** 
+   received note_store verbosity request
+ok
+(node1@vm-alarm)5> snmp_manager:async_get().
+*** [2024-11-28 21:23:06.442] SNMP M-SERVER LOG *** 
+   [snmp_manager,"Agent1"] received async_get request for: 
+   [[1,3,6,1,2,1,1,1,0]]
+*** [2024-11-28 21:23:06.443] SNMP M-SERVER TRACE *** 
+   handle_async_get -> entry with
+   Pid:        <0.91.0>
+   UserId:     snmp_manager
+   TargetName: "Agent1"
+   Oids:       [[1,3,6,1,2,1,1,1,0]]
+   SendOpts:   []
+*** [2024-11-28 21:23:06.443] SNMP M-SERVER TRACE *** 
+   handle_async_get -> send a 'version-2' message
+*** [2024-11-28 21:23:06.443] SNMP M-SERVER TRACE *** 
+   send_get_request -> send get-request:
+   Mod:     snmpm_net_if
+   NetIf:   <0.125.0>
+   Pdu:     {pdu,'get-request',643605020,noError,0,
+                 [{varbind,[1,3,6,1,2,1,1,1,0],'NULL','NULL',undefined}]}
+   Vsn:     'version-2'
+   MsgData: {"public",v2c}
+   Domain:  snmpUDPDomain
+   Addr:    {{127,0,0,1},161}
+*** [2024-11-28 21:23:06.444] SNMP M-SERVER TRACE *** 
+   send_get_request -> send result:
+   ok
+*** [2024-11-28 21:23:06.444] SNMP M-NET-IF LOG *** 
+   received send_pdu message with
+   Pdu:     {pdu,'get-request',643605020,noError,0,
+                 [{varbind,[1,3,6,1,2,1,1,1,0],'NULL','NULL',undefined}]}
+   Vsn:     'version-2'
+   MsgData: {"public",v2c}
+   Domain:  snmpUDPDomain
+   Addr:    {{127,0,0,1},161}
+*** [2024-11-28 21:23:06.444] SNMP M-SERVER DEBUG *** 
+   handle_async_get -> ReqId: 643605020
+Async GET Request sent.
+*** [2024-11-28 21:23:06.445] SNMP M-NET-IF MPD DEBUG *** 
+   generate_v1_v2c_msg -> encode pdu
+ok
+*** [2024-11-28 21:23:06.446] SNMP M-NET-IF MPD DEBUG *** 
+   generate_v1_v2c_outgoing_msg -> encode message
+*** [2024-11-28 21:23:06.447] SNMP M-NET-IF TRACE *** 
+   handle_send_pdu -> message generated
+*** [2024-11-28 21:23:06.447] SNMP M-NET-IF DEBUG *** 
+   sent 43 bytes to {127,0,0,1}:161 [#Port<0.8>]
+*** [2024-11-28 21:23:06.447] SNMP M-NET-IF LOG *** 
+   received 148 bytes from {127,0,0,1}:161 [#Port<0.8>]
+*** [2024-11-28 21:23:06.447] SNMP M-NET-IF MPD DEBUG *** 
+   process_v1_v2c_msg -> entry with
+   Vsn:       'version-2'
+   Domain:    snmpUDPDomain
+   Addr:      {{127,0,0,1},161}
+   Community: "public"
+   HS:        30
+*** [2024-11-28 21:23:06.448] SNMP M-NET-IF MPD TRACE *** 
+   process_v1_v2c_msg -> PduMS: 454
+*** [2024-11-28 21:23:06.448] SNMP M-NET-IF MPD TRACE *** 
+   process_v1_v2c_msg -> was a pdu
+*** [2024-11-28 21:23:06.449] SNMP M-NET-IF TRACE *** 
+   received pdu
+*** [2024-11-28 21:23:06.449] SNMP M-SERVER LOG *** 
+   received snmp_pdu message
+*** [2024-11-28 21:23:06.449] SNMP M-SERVER TRACE *** 
+   handle_snmp_pdu(get-response) -> entry with
+   Domain:  snmpUDPDomain
+   Addr:    {{127,0,0,1},161}
+   Pdu:     {pdu,'get-response',643605020,noError,0,
+                 [{varbind,[1,3,6,1,2,1,1,1,0],
+                           'OCTET STRING',
+                           "Linux vm-alarm 6.8.0-49-generic #49~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Wed Nov  6 17:42:15 UTC 2 x86_64",
+                           1}]}
+*** [2024-11-28 21:23:06.450] SNMP M-SERVER DEBUG *** 
+   handle_snmp_pdu(get-response) -> found corresponding request: 
+   reply to async request or late reply to sync request
+   UserId: snmp_manager
+   ModRef: undefined
+   Disco:  false
+*** [2024-11-28 21:23:06.450] SNMP M-SERVER TRACE *** 
+   handle_pdu(target_name) -> entry when
+   Mod: snmpm_user1
+handle_pdu (A snmpm_user CB)
+received handle_pdu:
+   Agent:   "Agent1"
+   ReqId:        643605020
+   SnmpResponse: {noError,0,
+                          [{varbind,[1,3,6,1,2,1,1,1,0],
+                                    'OCTET STRING',
+                                    "Linux vm-alarm 6.8.0-49-generic #49~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Wed Nov  6 17:42:15 UTC 2 x86_64",
+                                    1}]}
+   Server:     undefined
+(node1@vm-alarm)6> 
+
