@@ -1,0 +1,255 @@
+Traces when trap is received. snmpm verbosity enabled to highest level. Traces enable for snmpm_server & snmpm_config
+
+Erlang/OTP 27 [DEVELOPMENT] [erts-14.1.1] [source] [64-bit] [smp:6:6] [ds:6:6:10] [async-threads:1]
+
+Eshell V14.1.1 (press Ctrl+G to abort, type help(). for help)
+(node2@vm-alarm)1> snmp_manager:start().
+dets: file "/home/narasimha/git2/snmpm/snmpm_config_db" not properly closed, repairing ...
+ok
+(node2@vm-alarm)2> dbg:tracer().
+{ok,<0.117.0>}
+(node2@vm-alarm)3> dbg:tpl(snmpm_server, '_', []).
+{ok,[{matched,'node2@vm-alarm',183}]}
+(node2@vm-alarm)4> dbg:tpl(snmpm_config, '_', []).
+{ok,[{matched,'node2@vm-alarm',251}]}
+(node2@vm-alarm)5> dbg:p(all, c).
+{ok,[{matched,'node2@vm-alarm',68}]}
+(node2@vm-alarm)6> snmpm:verbosity(all, trace).
+(<0.91.0>) call snmpm_config:verbosity(trace)
+(<0.91.0>) call snmpm_config:call({verbosity,trace})
+(<0.91.0>) call snmpm_config:call({verbosity,trace},infinity)
+(<0.98.0>) call snmpm_config:handle_call({verbosity,trace},{<0.91.0>,#Ref<0.2059468607.1336410113.19463>},{state,undefined})
+(<0.91.0>) call snmpm_server:verbosity(trace)
+(<0.91.0>) call snmpm_server:call({verbosity,trace})
+(<0.91.0>) call snmpm_server:call({verbosity,trace},infinity)
+(<0.111.0>) call snmpm_server:handle_call({verbosity,trace},{<0.91.0>,#Ref<0.2059468607.1336410113.19476>},{state,undefined,<0.112.0>,<0.113.0>,#Ref<0.2059468607.1336410113.19337>,
+       <0.115.0>,snmpm_net_if,#Ref<0.2059468607.1336410113.19402>,none,
+       undefined,undefined,undefined,[],temporary,undefined})
+(<0.91.0>) call snmpm_server:verbosity(net_if,trace)
+(<0.91.0>) call snmpm_server:verbosity2(net_if,trace)
+(<0.91.0>) call snmpm_server:call({verbosity,net_if,trace})
+(<0.91.0>) call snmpm_server:call({verbosity,net_if,trace},infinity)
+(<0.111.0>) call snmpm_server:handle_call({verbosity,net_if,trace},{<0.91.0>,#Ref<0.2059468607.1336410113.19478>},{state,undefined,<0.112.0>,<0.113.0>,#Ref<0.2059468607.1336410113.19337>,
+       <0.115.0>,snmpm_net_if,#Ref<0.2059468607.1336410113.19402>,none,
+       undefined,undefined,undefined,[],temporary,undefined})
+*** [2024-12-09 21:31:33.847] SNMP M-SERVER LOG *** 
+   received net_if verbosity request
+(<0.91.0>) call snmpm_server:verbosity(note_store,trace)
+*** [2024-12-09 21:31:33.850] SNMP M-SERVER LOG *** 
+   received note_store verbosity request
+(<0.91.0>) call snmpm_server:verbosity2(note_store,trace)
+(<0.91.0>) call snmpm_server:call({verbosity,note_store,trace})
+(<0.91.0>) call snmpm_server:call({verbosity,note_store,trace},infinity)
+(<0.111.0>) call snmpm_server:handle_call({verbosity,note_store,trace},{<0.91.0>,#Ref<0.2059468607.1336410113.19514>},{state,undefined,<0.112.0>,<0.113.0>,#Ref<0.2059468607.1336410113.19337>,
+       <0.115.0>,snmpm_net_if,#Ref<0.2059468607.1336410113.19402>,none,
+       undefined,undefined,undefined,[],temporary,undefined})
+ok
+*** [2024-12-09 21:31:50.094] SNMP M-NET-IF LOG *** 
+   received 94 bytes from {127,0,0,1}:33354 [#Port<0.8>]
+(<0.115.0>) call snmpm_config:default_transport_domain()
+(<0.115.0>) call snmpm_config:incr_stats_counter(snmpInPkts,1)
+*** [2024-12-09 21:31:50.098] SNMP M-NET-IF MPD DEBUG *** 
+   process_v1_v2c_msg -> entry with
+   Vsn:       'version-2'
+   Domain:    snmpUDPDomain
+   Addr:      {{127,0,0,1},33354}
+   Community: "public"
+   HS:        30
+*** [2024-12-09 21:31:50.099] SNMP M-NET-IF MPD LOG *** 
+   [agent engine max msg size lookup] unknown agent: 127.0.0.1:33354
+      Known Agents: [{"Agent1",{{127,0,0,1},161}}]
+(<0.115.0>) call snmpm_config:get_engine_max_message_size()
+(<0.115.0>) call snmpm_config:system_info(max_message_size)
+(<0.115.0>) call snmpm_config:get_agent_engine_max_message_size(snmpUDPDomain,{{127,0,0,1},33354})
+(<0.115.0>) call snmpm_config:agent_info(snmpUDPDomain,{{127,0,0,1},33354},max_message_size)
+(<0.115.0>) call snmpm_config:fix_address(snmpUDPDomain,{{127,0,0,1},33354})
+(<0.115.0>) call snmpm_config:do_agent_info(snmpUDPDomain,{{127,0,0,1},33354},max_message_size)
+(<0.115.0>) call snmpm_config:do_agent_info(snmpUDPDomain,{{127,0,0,1},33354},target_name)
+(<0.115.0>) call snmpm_config:which_agents()
+(<0.115.0>) call snmpm_config:which_agents('_')
+(<0.115.0>) call snmpm_config:'-which_agents/1-lc$^0/1-0-'([["Agent1"]])
+(<0.115.0>) call snmpm_config:'-which_agents/1-lc$^0/1-0-'([])
+(<0.115.0>) call snmpm_config:agent_info("Agent1",taddress)
+(<0.115.0>) call snmpm_config:agent_info({"Agent1",taddress})
+*** [2024-12-09 21:31:50.101] SNMP M-NET-IF MPD TRACE *** 
+   process_v1_v2c_msg -> PduMS: 454
+(<0.115.0>) call snmpm_config:get_engine_max_message_size()
+(<0.115.0>) call snmpm_config:system_info(max_message_size)
+*** [2024-12-09 21:31:50.102] SNMP M-NET-IF MPD TRACE *** 
+   process_v1_v2c_msg -> was a pdu
+*** [2024-12-09 21:31:50.102] SNMP M-NET-IF TRACE *** 
+   received snmpv2-trap
+(<0.115.0>) call snmpm_config:default_transport_domain()
+*** [2024-12-09 21:31:50.103] SNMP M-SERVER LOG *** 
+   received snmp_trap message
+(<0.111.0>) call snmpm_server:handle_info({snmp_trap,{pdu,'snmpv2-trap',581007962,noError,0,
+                [{varbind,[1,3,6,1,2,1,1,3,0],'TimeTicks',15525936,1},
+                 {varbind,[1,3,6,1,6,3,1,1,4,1,0],
+                          'OBJECT IDENTIFIER',
+                          [1,3,6,1,4,1,8072,2,3,0,1],
+                          2},
+                 {varbind,[1,3,6,1,2,1,1,3,0],'OCTET STRING',"Trap 2",3}]},
+           snmpUDPDomain,
+           {{127,0,0,1},33354}},{state,undefined,<0.112.0>,<0.113.0>,#Ref<0.2059468607.1336410113.19337>,
+       <0.115.0>,snmpm_net_if,#Ref<0.2059468607.1336410113.19402>,none,
+       undefined,undefined,undefined,[],temporary,undefined})
+*** [2024-12-09 21:31:50.104] SNMP M-SERVER TRACE *** 
+   handle_snmp_trap [pdu] -> entry with
+   Domain:  snmpUDPDomain
+   Addr:    {{127,0,0,1},33354}
+   Trap:    {pdu,'snmpv2-trap',581007962,noError,0,
+                 [{varbind,[1,3,6,1,2,1,1,3,0],'TimeTicks',15525936,1},
+                  {varbind,[1,3,6,1,6,3,1,1,4,1,0],
+                           'OBJECT IDENTIFIER',
+                           [1,3,6,1,4,1,8072,2,3,0,1],
+                           2},
+                  {varbind,[1,3,6,1,2,1,1,3,0],'OCTET STRING',"Trap 2",3}]}
+(<0.111.0>) call snmpm_server:handle_snmp_trap({pdu,'snmpv2-trap',581007962,noError,0,
+     [{varbind,[1,3,6,1,2,1,1,3,0],'TimeTicks',15525936,1},
+      {varbind,[1,3,6,1,6,3,1,1,4,1,0],
+               'OBJECT IDENTIFIER',
+               [1,3,6,1,4,1,8072,2,3,0,1],
+               2},
+      {varbind,[1,3,6,1,2,1,1,3,0],'OCTET STRING',"Trap 2",3}]},snmpUDPDomain,{{127,0,0,1},33354},{state,undefined,<0.112.0>,<0.113.0>,#Ref<0.2059468607.1336410113.19337>,
+       <0.115.0>,snmpm_net_if,#Ref<0.2059468607.1336410113.19402>,none,
+       undefined,undefined,undefined,[],temporary,undefined})
+*** [2024-12-09 21:31:50.106] SNMP M-SERVER LOG *** 
+   [trap] failed retrieving user id for agent <snmpUDPDomain,{{127,0,0,1},
+                                                              33354}>: 
+      Error:  {error,
+                  {target_name_not_found,snmpUDPDomain,{{127,0,0,1},33354}}}
+   when
+      Users:  [snmp_manager]
+      Agents: ["Agent1"]
+(<0.111.0>) call snmpm_server:fix_vbs_BITS([{varbind,[1,3,6,1,2,1,1,3,0],'TimeTicks',15525936,1},
+ {varbind,[1,3,6,1,6,3,1,1,4,1,0],
+          'OBJECT IDENTIFIER',
+          [1,3,6,1,4,1,8072,2,3,0,1],
+          2},
+ {varbind,[1,3,6,1,2,1,1,3,0],'OCTET STRING',"Trap 2",3}])
+(<0.111.0>) call snmpm_server:'-fix_vbs_BITS/1-lc$^0/1-0-'([{varbind,[1,3,6,1,2,1,1,3,0],'TimeTicks',15525936,1},
+ {varbind,[1,3,6,1,6,3,1,1,4,1,0],
+          'OBJECT IDENTIFIER',
+          [1,3,6,1,4,1,8072,2,3,0,1],
+          2},
+ {varbind,[1,3,6,1,2,1,1,3,0],'OCTET STRING',"Trap 2",3}])
+(<0.111.0>) call snmpm_server:fix_vb_BITS({varbind,[1,3,6,1,2,1,1,3,0],'TimeTicks',15525936,1})
+(<0.111.0>) call snmpm_server:'-fix_vbs_BITS/1-lc$^0/1-0-'([{varbind,[1,3,6,1,6,3,1,1,4,1,0],
+          'OBJECT IDENTIFIER',
+          [1,3,6,1,4,1,8072,2,3,0,1],
+          2},
+ {varbind,[1,3,6,1,2,1,1,3,0],'OCTET STRING',"Trap 2",3}])
+(<0.111.0>) call snmpm_server:fix_vb_BITS({varbind,[1,3,6,1,6,3,1,1,4,1,0],
+         'OBJECT IDENTIFIER',
+         [1,3,6,1,4,1,8072,2,3,0,1],
+         2})
+(<0.111.0>) call snmpm_server:'-fix_vbs_BITS/1-lc$^0/1-0-'([{varbind,[1,3,6,1,2,1,1,3,0],'OCTET STRING',"Trap 2",3}])
+(<0.111.0>) call snmpm_server:fix_vb_BITS({varbind,[1,3,6,1,2,1,1,3,0],'OCTET STRING',"Trap 2",3})
+(<0.111.0>) call snmpm_server:type_of_oid([1,3,6,1,2,1,1,3,0])
+(<0.111.0>) call snmpm_config:oid_to_type([1,3,6,1,2,1,1,3])
+(<0.111.0>) call snmpm_server:'-fix_vbs_BITS/1-lc$^0/1-0-'([])
+(<0.111.0>) call snmpm_server:do_handle_snmp_trap({noError,0,
+         [{varbind,[1,3,6,1,2,1,1,3,0],'TimeTicks',15525936,1},
+          {varbind,[1,3,6,1,6,3,1,1,4,1,0],
+                   'OBJECT IDENTIFIER',
+                   [1,3,6,1,4,1,8072,2,3,0,1],
+                   2},
+          {varbind,[1,3,6,1,2,1,1,3,0],'OCTET STRING',"Trap 2",3}]},snmpUDPDomain,{{127,0,0,1},33354},{state,undefined,<0.112.0>,<0.113.0>,#Ref<0.2059468607.1336410113.19337>,
+       <0.115.0>,snmpm_net_if,#Ref<0.2059468607.1336410113.19402>,none,
+       undefined,undefined,undefined,[],temporary,undefined})
+(<0.111.0>) call snmpm_config:get_agent_user_info(snmpUDPDomain,{{127,0,0,1},33354})
+(<0.111.0>) call snmpm_config:agent_info(snmpUDPDomain,{{127,0,0,1},33354},target_name)
+(<0.111.0>) call snmpm_config:fix_address(snmpUDPDomain,{{127,0,0,1},33354})
+(<0.111.0>) call snmpm_config:do_agent_info(snmpUDPDomain,{{127,0,0,1},33354},target_name)
+(<0.111.0>) call snmpm_config:which_users()
+(<0.111.0>) call snmpm_config:'-which_users/0-lc$^0/1-0-'([[snmp_manager],[default_user]])
+(<0.111.0>) call snmpm_config:'-which_users/0-lc$^0/1-0-'([[default_user]])
+(<0.111.0>) call snmpm_config:'-which_users/0-lc$^0/1-0-'([])
+(<0.111.0>) call snmpm_config:which_agents()
+(<0.111.0>) call snmpm_config:which_agents('_')
+(<0.111.0>) call snmpm_config:'-which_agents/1-lc$^0/1-0-'([["Agent1"]])
+(<0.111.0>) call snmpm_config:'-which_agents/1-lc$^0/1-0-'([])
+*** [2024-12-09 21:31:50.111] SNMP M-SERVER TRACE *** 
+   handle_agent -> entry when
+   UserId: default_user
+   Type:   trap
+   Mod:    snmpm_user_default
+(<0.111.0>) call snmpm_config:user_info()
+(<0.111.0>) call snmpm_config:user_info(default_user)
+(<0.111.0>) call snmpm_server:handle_agent(default_user,snmpm_user_default,snmpUDPDomain,{{127,0,0,1},33354},trap,ignore,{noError,0,
+         [{varbind,[1,3,6,1,2,1,1,3,0],'TimeTicks',15525936,1},
+          {varbind,[1,3,6,1,6,3,1,1,4,1,0],
+                   'OBJECT IDENTIFIER',
+                   [1,3,6,1,4,1,8072,2,3,0,1],
+                   2},
+          {varbind,[1,3,6,1,2,1,1,3,0],'OCTET STRING',"Trap 2",3}]},undefined,{state,undefined,<0.112.0>,<0.113.0>,#Ref<0.2059468607.1336410113.19337>,
+       <0.115.0>,snmpm_net_if,#Ref<0.2059468607.1336410113.19402>,none,
+       undefined,undefined,undefined,[],temporary,undefined})
+(<0.111.0>) call snmpm_server:handle_callback(temporary,do_handle_agent,[default_user,snmpm_user_default,snmpUDPDomain,
+ {{127,0,0,1},33354},
+ trap,ignore,
+ {noError,0,
+          [{varbind,[1,3,6,1,2,1,1,3,0],'TimeTicks',15525936,1},
+           {varbind,[1,3,6,1,6,3,1,1,4,1,0],
+                    'OBJECT IDENTIFIER',
+                    [1,3,6,1,4,1,8072,2,3,0,1],
+                    2},
+           {varbind,[1,3,6,1,2,1,1,3,0],'OCTET STRING',"Trap 2",3}]},
+ undefined,
+ {state,undefined,<0.112.0>,<0.113.0>,#Ref<0.2059468607.1336410113.19337>,
+        <0.115.0>,snmpm_net_if,#Ref<0.2059468607.1336410113.19402>,none,
+        undefined,undefined,undefined,[],temporary,undefined}])
+*** [2024-12-09 21:31:50.113] SNMP M-SERVER-worker(<0.124.0>) DEBUG *** 
+   do_handle_agent -> entry when
+   DefUserId: default_user
+(<0.124.0>) call snmpm_server:'-handle_callback/3-fun-0-'(do_handle_agent,[default_user,snmpm_user_default,snmpUDPDomain,
+ {{127,0,0,1},33354},
+ trap,ignore,
+ {noError,0,
+          [{varbind,[1,3,6,1,2,1,1,3,0],'TimeTicks',15525936,1},
+           {varbind,[1,3,6,1,6,3,1,1,4,1,0],
+                    'OBJECT IDENTIFIER',
+                    [1,3,6,1,4,1,8072,2,3,0,1],
+                    2},
+           {varbind,[1,3,6,1,2,1,1,3,0],'OCTET STRING',"Trap 2",3}]},
+ undefined,
+ {state,undefined,<0.112.0>,<0.113.0>,#Ref<0.2059468607.1336410113.19337>,
+        <0.115.0>,snmpm_net_if,#Ref<0.2059468607.1336410113.19402>,none,
+        undefined,undefined,undefined,[],temporary,undefined}],trace)
+(<0.124.0>) call snmpm_server:do_handle_agent(default_user,snmpm_user_default,snmpUDPDomain,{{127,0,0,1},33354},trap,ignore,{noError,0,
+         [{varbind,[1,3,6,1,2,1,1,3,0],'TimeTicks',15525936,1},
+          {varbind,[1,3,6,1,6,3,1,1,4,1,0],
+                   'OBJECT IDENTIFIER',
+                   [1,3,6,1,4,1,8072,2,3,0,1],
+                   2},
+          {varbind,[1,3,6,1,2,1,1,3,0],'OCTET STRING',"Trap 2",3}]},undefined,{state,undefined,<0.112.0>,<0.113.0>,#Ref<0.2059468607.1336410113.19337>,
+       <0.115.0>,snmpm_net_if,#Ref<0.2059468607.1336410113.19402>,none,
+       undefined,undefined,undefined,[],temporary,undefined})
+*** [2024-12-09 21:31:50.117] SNMP M-SERVER-worker(<0.124.0>) DEBUG *** 
+   do_handle_agent -> ignore
+=INFO REPORT==== 9-Dec-2024::21:31:50.116807 ===
+SNMPM default user callback received handle_agent:
+   Domain:   {127,0,0,1}
+   Address:  33354
+   Type:     trap
+   SnmpInfo: {noError,0,
+                      [{varbind,[1,3,6,1,2,1,1,3,0],'TimeTicks',15525936,1},
+                       {varbind,[1,3,6,1,6,3,1,1,4,1,0],
+                                'OBJECT IDENTIFIER',
+                                [1,3,6,1,4,1,8072,2,3,0,1],
+                                2},
+                       {varbind,[1,3,6,1,2,1,1,3,0],
+                                'OCTET STRING',"Trap 2",3}]}
+   UserData: undefined
+
+(<0.112.0>) call snmpm_server:gct({gct,<0.111.0>,active,30000},30000)
+*** [2024-12-09 21:32:03.860] SNMP M-SERVER LOG *** 
+   received gc_timeout message
+(<0.111.0>) call snmpm_server:handle_info(gc_timeout,{state,undefined,<0.112.0>,<0.113.0>,#Ref<0.2059468607.1336410113.19337>,
+       <0.115.0>,snmpm_net_if,#Ref<0.2059468607.1336410113.19402>,none,
+       undefined,undefined,undefined,[],temporary,undefined})
+(<0.111.0>) call snmpm_server:handle_gc(<0.112.0>)
+(<0.111.0>) call snmpm_server:do_gc('$end_of_table',-576460718791)
+(<0.111.0>) call snmpm_server:gct_deactivate(<0.112.0>)
+(<0.112.0>) call snmpm_server:gct({gct,<0.111.0>,idle,30000},30000)
+(node2@vm-alarm)7> 
